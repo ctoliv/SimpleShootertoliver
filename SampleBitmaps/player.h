@@ -25,7 +25,7 @@ private:
 	int boundx;
 	int boundy;
 	int direction;
-	ALLEGRO_BITMAP *image;
+	ALLEGRO_BITMAP *image[2];
 };
 #endif
 
