@@ -35,6 +35,7 @@ weapon::weapon()
 	boundy = al_get_bitmap_height(image)/2;
 	live=false;
 	angle=0;
+	direction = 1;
 
 }
 void weapon::Drawweapon()
@@ -45,25 +46,67 @@ void weapon::Drawweapon()
 		angle+=.1;
 	}
 }
-void weapon::Fireweapon( player &Player)
+void weapon::Fireweapon(player& Player)
 {
-	if(!live)
+	if (!live)
 	{
-		x = Player.getX() + Player.getBoundX();
-		y = Player.getY() + Player.getBoundY()/2;
+		direction = Player.getDirection();
+
+		if (direction == 0)
+		{
+			// Fire upward from the top of the player
+			x = Player.getX() + Player.getBoundX() / 2;
+			y = Player.getY();
+		}
+		else if (direction == 1)
+		{
+			// Fire right from the right side of the player
+			x = Player.getX() + Player.getBoundX();
+			y = Player.getY() + Player.getBoundY() / 2;
+		}
+		else if (direction == 2)
+		{
+			// Fire downward from the bottom of the player
+			x = Player.getX() + Player.getBoundX() / 2;
+			y = Player.getY() + Player.getBoundY();
+		}
+		else if (direction == 3)
+		{
+			// Fire left from the left side of the player
+			x = Player.getX();
+			y = Player.getY() + Player.getBoundY() / 2;
+		}
+
 		live = true;
 	}
 }
-void weapon::Updateweapon(int WIDTH)
+void weapon::Updateweapon(int WIDTH, int HEIGHT)
 {
-	if(live)
+	if (live)
 	{
-		x += speed;
-		if(x > WIDTH)
+		if (direction == 0)
+		{
+			y -= speed;
+		}
+		else if (direction == 1)
+		{
+			x += speed;
+		}
+		else if (direction == 2)
+		{
+			y += speed;
+		}
+		else if (direction == 3)
+		{
+			x -= speed;
+		}
+
+		if (x > WIDTH || x < 0 || y > HEIGHT || y < 0)
+		{
 			live = false;
+		}
 	}
-}
-void weapon::Collideweapon(BadGuy BadGuys[], int cSize)
+}void weapon::Collideweapon(BadGuy BadGuys[], int cSize)
 {
 	if(live)
 	{

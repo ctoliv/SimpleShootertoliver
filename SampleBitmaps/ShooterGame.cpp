@@ -78,7 +78,7 @@ int main(void)
 				myPlayer.MoveRight(WIDTH);
 
 			for(int i=0;i<NUM_weapons;i++)
-				weapons[i].Updateweapon(WIDTH);
+				weapons[i].Updateweapon(WIDTH, HEIGHT);
 			for(int i=0;i<NUM_BadGuyS;i++)
 				BadGuys[i].StartBadGuy(WIDTH,HEIGHT);
 			for(int i=0;i<NUM_weapons;i++)
