@@ -34,6 +34,7 @@ player::player(int HEIGHT)
 	speed = 7;
 	boundx = al_get_bitmap_width(image);
 	boundy = al_get_bitmap_height(image);
+	direction = 1;
 
 }
 void player::DrawPlayer()
@@ -42,24 +43,28 @@ void player::DrawPlayer()
 }
 void player::MoveUp()
 {
+	direction = 0;
 	y -= speed;
 	if(y < 0)
 		y = 0;
 }
 void player::MoveDown(int HEIGHT)
 {
+	direction = 2;
 	y += speed;
 	if(y > HEIGHT-boundy)
 		y = HEIGHT-boundy;
 }
 void player::MoveLeft()
 {
+	direction = 3;
 	x -= speed;
 	if(x < 0)
 		x = 0;
 }
 void player::MoveRight(int WIDTH)
 {
+	direction = 1;
 	x += speed;
 	if(x > WIDTH-boundx)
 		x = WIDTH-boundx;

@@ -15,6 +15,7 @@ public:
 	void MoveRight(int WIDTH);
 	int getBoundX(){return boundx;}
 	int getBoundY(){return boundy;}
+	int getDirection(){ return direction;}
 	int getX(){return x;}
 	int getY(){return y;}
 private:
@@ -23,6 +24,7 @@ private:
 	int speed;
 	int boundx;
 	int boundy;
+	int direction;
 	ALLEGRO_BITMAP *image;
 };
 #endif
