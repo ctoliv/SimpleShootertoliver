@@ -15,6 +15,7 @@ BadGuy::BadGuy()
 
 	x = 0;
 	y = 0;
+	speed = 0;
 
 	al_draw_filled_rectangle(25,10,39,54,al_map_rgb(100, 100, 120));
 	al_draw_filled_ellipse(32,32,32,16,al_map_rgb(255, 0, 255));
@@ -36,22 +37,51 @@ void BadGuy::DrawBadGuy()
 	}
 
 }
-void BadGuy::StartBadGuy(int WIDTH, int HEIGHT )
+void BadGuy::StartBadGuy(int WIDTH, int HEIGHT, BadGuy BadGuys[], int cSize, int currentIndex)
 {
 
 	if(!live)
 	{
 		if(rand() % 500 == 0)
 		{
-			live = true;
-			do{
-				x =  rand() % (WIDTH - boundx); 
-			}while (x <100);
-			do{
-				y =  rand() % (HEIGHT - boundy);
-			}while (y<100);
+			bool validSpot = false;
+			int tries = 0;
 
+			while (!validSpot && tries < 100)
+			{
+				do
+				{
+					x = rand() % (WIDTH - boundx);
+				} while (x < 100);
+
+				do
+				{
+					y = rand() % (HEIGHT - boundy);
+				} while (y < 100);
+
+				validSpot = true;
+
+				for (int i = 0; i < cSize; i++)
+				{
+					if (i != currentIndex && BadGuys[i].getLive())
+					{
+						if (x < BadGuys[i].getX() + BadGuys[i].getBoundX() &&
+							x + boundx > BadGuys[i].getX() &&
+							y < BadGuys[i].getY() + BadGuys[i].getBoundY() &&
+							y + boundy > BadGuys[i].getY())
+						{
+							validSpot = false;
+						}
+					}
+				}
+
+				tries++;
+			}
+
+			if (validSpot)
+			{
+				live = true;
+			}
 		}
 	}
 }
-
