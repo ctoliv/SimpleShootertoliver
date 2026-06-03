@@ -37,6 +37,7 @@ void BadGuy::DrawBadGuy()
 	}
 
 }
+// Prevents bad guy overlap
 void BadGuy::StartBadGuy(int WIDTH, int HEIGHT, BadGuy BadGuys[], int cSize, int currentIndex)
 {
 

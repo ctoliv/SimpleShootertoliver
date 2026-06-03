@@ -49,7 +49,7 @@ int main(void)
 	weapon weapons[NUM_weapons];
 	BadGuy BadGuys[NUM_BadGuyS];
 
-
+	//Event/Timer setup
 	event_queue = al_create_event_queue();
 	timer = al_create_timer(1.0 / FPS);
 
