@@ -16,6 +16,7 @@ public:
 	int getBoundX(){return boundx;}
 	int getBoundY(){return boundy;}
 	int getDirection(){ return direction;}
+	void setPosition(int newX, int newY);
 	int getX(){return x;}
 	int getY(){return y;}
 private:

@@ -75,6 +75,14 @@ void player::DrawPlayer()
 		al_draw_bitmap(image[0], x, y, ALLEGRO_FLIP_HORIZONTAL);
 	}
 }
+
+void player::setPosition(int newX, int newY)
+{
+	x = newX;
+	y = newY;
+}
+
+
 void player::MoveUp()
 {
 	direction = 0;

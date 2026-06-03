@@ -68,14 +68,32 @@ int main(void)
 		if(ev.type == ALLEGRO_EVENT_TIMER)
 		{
 			redraw = true;
-			if(keys[UP])
+			int oldX = myPlayer.getX();
+			int oldY = myPlayer.getY();
+
+			if (keys[UP])
 				myPlayer.MoveUp();
-			if(keys[DOWN])
+			if (keys[DOWN])
 				myPlayer.MoveDown(HEIGHT);
-			if(keys[LEFT])
+			if (keys[LEFT])
 				myPlayer.MoveLeft();
-			if(keys[RIGHT])
+			if (keys[RIGHT])
 				myPlayer.MoveRight(WIDTH);
+
+			// If the player hits a live bad guy, move the player back.
+			for (int i = 0; i < NUM_BadGuyS; i++)
+			{
+				if (BadGuys[i].getLive())
+				{
+					if (myPlayer.getX() < BadGuys[i].getX() + BadGuys[i].getBoundX() &&
+						myPlayer.getX() + myPlayer.getBoundX() > BadGuys[i].getX() &&
+						myPlayer.getY() < BadGuys[i].getY() + BadGuys[i].getBoundY() &&
+						myPlayer.getY() + myPlayer.getBoundY() > BadGuys[i].getY())
+					{
+						myPlayer.setPosition(oldX, oldY);
+					}
+				}
+			}
 
 			for(int i=0;i<NUM_weapons;i++)
 				weapons[i].Updateweapon(WIDTH, HEIGHT);
